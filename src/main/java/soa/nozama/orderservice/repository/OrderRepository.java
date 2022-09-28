@@ -12,11 +12,11 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findAll();
 
-    Optional<Order> findById(long id);
+    Order findById(long id);
 
-    List<Order> findByUserId(int userId);
+    List<Order> findAllByUserId(String userId);
 
-    List<Order> findByStatus(String status);
+    Optional<Order> findAllByStatus(String status);
 
-    Order save(Order usuario);
+    Order save(Order order);
 }

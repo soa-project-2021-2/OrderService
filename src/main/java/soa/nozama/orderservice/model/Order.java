@@ -1,15 +1,12 @@
 package soa.nozama.orderservice.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
-@Data
+@Getter
+@Setter
 @Builder
 @Entity
 @AllArgsConstructor
@@ -23,8 +20,11 @@ public class Order {
     @Column(name = "userId")
     private String userId;
 
-    @Column(name = "products")
-    private ArrayList<String> products;
+    @ElementCollection
+    private List<Product> products = new ArrayList<>();
+
+    @Column(name = "amount")
+    private double amount;
 
     @Column(name = "status")
     private String status;
@@ -32,13 +32,18 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
-                ", products=" + products +
-                ", status='" + status + '\'' +
-                '}';
+    public Order(String userId, List<Product> products) {
+
+        double amount = 0;
+
+        for(Product product : products){
+            amount += product.getPrice() * product.getQty();
+        }
+
+        this.userId = userId;
+        this.products = products;
+        this.amount = amount;
+        this.status = "Created";
+        this.createdAt = new Date();
     }
 }
