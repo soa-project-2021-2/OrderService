@@ -43,7 +43,7 @@ public class Order {
         this.userId = userId;
         this.products = products;
         this.amount = amount;
-        this.status = "Created";
+        this.status = "created";
         this.createdAt = new Date();
     }
 }
