@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import soa.nozama.orderservice.model.Order;
 import soa.nozama.orderservice.repository.OrderRepository;
 
@@ -54,6 +55,15 @@ public class OrderController {
         Order newOrder = new Order( order.getUserId(), order.getProducts());
 
         Order _order = orderRepository.save(newOrder);
+
+        String url = "http://localhost:8000";
+
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            System.out.println(restTemplate.postForObject(url, _order, Order.class));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return new ResponseEntity<>(_order, HttpStatus.CREATED);
     }
 
@@ -64,6 +74,15 @@ public class OrderController {
         order.setStatus(status);
 
         Order _order = orderRepository.save(order);
+
+        String url = "http://localhost:8000";
+
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            System.out.println(restTemplate.postForObject(url, _order, Order.class));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         return new ResponseEntity<>(_order, HttpStatus.CREATED);
     }
