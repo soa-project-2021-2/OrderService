@@ -11,7 +11,7 @@ import soa.nozama.orderservice.repository.OrderRepository;
 import java.util.ArrayList;
 import java.util.List;
 
-//@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/order")
 public class OrderController {
