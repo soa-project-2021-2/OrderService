@@ -56,7 +56,7 @@ public class OrderController {
 
         Order _order = orderRepository.save(newOrder);
 
-        String url = "http://localhost:8000";
+        String url = "https://soa-order-producer-service.herokuapp.com/";
 
         RestTemplate restTemplate = new RestTemplate();
         try {
@@ -75,7 +75,7 @@ public class OrderController {
 
         Order _order = orderRepository.save(order);
 
-        String url = "http://localhost:8000";
+        String url = "https://soa-order-producer-service.herokuapp.com/";
 
         RestTemplate restTemplate = new RestTemplate();
         try {
